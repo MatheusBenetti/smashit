@@ -7,13 +7,14 @@ import com.totex.smashit.core.enums.MatchType;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.List;
 
 public record MatchDto(
         Long id,
         LocalDate date,
         LocalTime hour,
         Court courtId,
-        Player players,
+        List<Player> players,
         MatchStatus matchStatus,
         MatchType matchType
 ) {}
