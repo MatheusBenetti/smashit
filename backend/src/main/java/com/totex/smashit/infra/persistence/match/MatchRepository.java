@@ -1,6 +1,5 @@
 package com.totex.smashit.infra.persistence.match;
 
-import com.totex.smashit.core.entities.match.Match;
 import com.totex.smashit.core.enums.CourtType;
 import com.totex.smashit.core.enums.MatchStatus;
 import com.totex.smashit.core.enums.PlayerLevel;
@@ -10,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface MatchRepository extends JpaRepository<Match, Long> {
+public interface MatchRepository extends JpaRepository<MatchEntity, Long> {
     boolean existsByMatchStatus(MatchStatus matchStatus);
 
     List<MatchEntity> findByMatchStatus(MatchStatus matchStatus);
