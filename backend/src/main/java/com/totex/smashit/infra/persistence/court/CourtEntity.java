@@ -22,4 +22,18 @@ public class CourtEntity {
     private String name;
 
     private CourtType courtType;
+
+    private String address;
+
+    private String city;
+
+    private String state;
+
+    private String club;
+
+    // To let people discover courts by location (like tinder)
+    // Finish MVP first then start looking for Google API
+    // private double long
+    // private double lat
+
 }
