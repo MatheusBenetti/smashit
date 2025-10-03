@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class BeansConfiguration {
+public class PlayerBeansConfiguration {
 
     @Bean
     public CreatePlayerUseCase createPlayerUseCase(PlayerGateway playerGateway) {
