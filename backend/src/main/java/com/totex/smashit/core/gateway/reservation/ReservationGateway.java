@@ -1,0 +1,8 @@
+package com.totex.smashit.core.gateway.reservation;
+
+import com.totex.smashit.core.entities.reservation.Reservation;
+
+public interface ReservationGateway {
+
+    public Reservation createReservation(Reservation reservation);
+}
