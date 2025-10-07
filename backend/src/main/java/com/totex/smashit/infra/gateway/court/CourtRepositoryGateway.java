@@ -5,7 +5,9 @@ import com.totex.smashit.core.gateway.court.CourtGateway;
 import com.totex.smashit.infra.mapper.court.CourtEntityMapper;
 import com.totex.smashit.infra.persistence.court.CourtEntity;
 import com.totex.smashit.infra.persistence.court.CourtRepository;
+import org.springframework.stereotype.Component;
 
+@Component
 public class CourtRepositoryGateway implements CourtGateway {
 
     private final CourtRepository courtRepository;
