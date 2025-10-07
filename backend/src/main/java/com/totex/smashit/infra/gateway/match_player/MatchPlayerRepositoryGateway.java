@@ -5,7 +5,9 @@ import com.totex.smashit.core.gateway.match_player.MatchPlayerGateway;
 import com.totex.smashit.infra.mapper.match_player.MatchPlayerEntityMapper;
 import com.totex.smashit.infra.persistence.match_player.MatchPlayerEntity;
 import com.totex.smashit.infra.persistence.match_player.MatchPlayerRepository;
+import org.springframework.stereotype.Component;
 
+@Component
 public class MatchPlayerRepositoryGateway implements MatchPlayerGateway {
 
     private final MatchPlayerEntityMapper matchPlayerEntityMapper;
