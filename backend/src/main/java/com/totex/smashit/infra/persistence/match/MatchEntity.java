@@ -1,6 +1,5 @@
 package com.totex.smashit.infra.persistence.match;
 
-import com.totex.smashit.core.entities.court.Court;
 import com.totex.smashit.core.enums.MatchStatus;
 import com.totex.smashit.core.enums.MatchType;
 import com.totex.smashit.infra.persistence.court.CourtEntity;
