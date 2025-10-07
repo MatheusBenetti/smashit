@@ -5,13 +5,15 @@ import com.totex.smashit.core.gateway.reservation.ReservationGateway;
 import com.totex.smashit.infra.mapper.reservation.ReservationEntityMapper;
 import com.totex.smashit.infra.persistence.reservation.ReservationEntity;
 import com.totex.smashit.infra.persistence.reservation.ReservationRepository;
+import org.springframework.stereotype.Component;
 
-public class ReservationEntityGateway implements ReservationGateway {
+@Component
+public class ReservationRepositoryGateway implements ReservationGateway {
 
     private final ReservationRepository reservationRepository;
     private final ReservationEntityMapper reservationEntityMapper;
 
-    public ReservationEntityGateway(ReservationRepository reservationRepository, ReservationEntityMapper reservationEntityMapper) {
+    public ReservationRepositoryGateway(ReservationRepository reservationRepository, ReservationEntityMapper reservationEntityMapper) {
         this.reservationRepository = reservationRepository;
         this.reservationEntityMapper = reservationEntityMapper;
     }
