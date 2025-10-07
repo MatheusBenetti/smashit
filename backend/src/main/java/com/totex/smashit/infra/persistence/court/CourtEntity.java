@@ -1,14 +1,14 @@
 package com.totex.smashit.infra.persistence.court;
 
 import com.totex.smashit.core.enums.CourtType;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+@Entity
+@Table(name = "court")
 @Getter
 @Setter
 @NoArgsConstructor
