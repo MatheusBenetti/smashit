@@ -5,7 +5,9 @@ import com.totex.smashit.core.gateway.match.MatchGateway;
 import com.totex.smashit.infra.mapper.match.MatchEntityMapper;
 import com.totex.smashit.infra.persistence.match.MatchEntity;
 import com.totex.smashit.infra.persistence.match.MatchRepository;
+import org.springframework.stereotype.Component;
 
+@Component
 public class MatchRepositoryGateway implements MatchGateway {
 
     private final MatchRepository matchRepository;
