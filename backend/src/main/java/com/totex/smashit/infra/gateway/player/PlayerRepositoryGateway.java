@@ -5,7 +5,9 @@ import com.totex.smashit.core.gateway.player.PlayerGateway;
 import com.totex.smashit.infra.mapper.player.PlayerEntityMapper;
 import com.totex.smashit.infra.persistence.player.PlayerEntity;
 import com.totex.smashit.infra.persistence.player.PlayerRepository;
+import org.springframework.stereotype.Component;
 
+@Component
 public class PlayerRepositoryGateway implements PlayerGateway {
 
     private final PlayerRepository playerRepository;
