@@ -29,7 +29,7 @@ public class ReservationController {
         Map<String, Object> response = new HashMap<>();
 
         response.put("Message: ", "Reservation created successfully!");
-        response.put("Reservatio  data: ", reservationMapper.toDto(newReservation));
+        response.put("Reservation data: ", reservationMapper.toDto(newReservation));
         return ResponseEntity.ok(response);
     }
 }
