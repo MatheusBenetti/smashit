@@ -7,6 +7,8 @@ import com.totex.smashit.infra.persistence.player.PlayerEntity;
 import com.totex.smashit.infra.persistence.player.PlayerRepository;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 public class PlayerRepositoryGateway implements PlayerGateway {
 
@@ -23,5 +25,10 @@ public class PlayerRepositoryGateway implements PlayerGateway {
         PlayerEntity entity = playerEntityMapper.toEntity(player);
         PlayerEntity newPlayer = playerRepository.save(entity);
         return playerEntityMapper.toDomain(newPlayer);
+    }
+
+    @Override
+    public List<Player> findPlayer() {
+        return playerRepository.findAll().stream().map(playerEntityMapper::toDomain).toList();
     }
 }
