@@ -16,5 +16,8 @@ public record Player(
         String state,
         String country,
         LocalDateTime createdAt,
-        LocalDateTime updatedAt
+        LocalDateTime updatedAt,
+        Integer wins,
+        Integer losses,
+        Double winRate
 ) {}
