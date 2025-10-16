@@ -20,7 +20,10 @@ public class PlayerEntityMapper {
                 player.state(),
                 player.country(),
                 player.createdAt(),
-                player.updatedAt()
+                player.updatedAt(),
+                player.wins() != null ? player.wins() : 0,
+                player.losses() != null ? player.losses() : 0,
+                player.winRate() != null ? player.winRate() : 0.0
         );
     }
 
@@ -37,7 +40,10 @@ public class PlayerEntityMapper {
                 playerEntity.getState(),
                 playerEntity.getCountry(),
                 playerEntity.getCreatedAt(),
-                playerEntity.getUpdatedAt()
+                playerEntity.getUpdatedAt(),
+                playerEntity.getWins(),
+                playerEntity.getLosses(),
+                playerEntity.getWinRate()
         );
     }
 }
