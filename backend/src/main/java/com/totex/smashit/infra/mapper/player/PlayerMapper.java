@@ -19,8 +19,9 @@ public class PlayerMapper {
                 player.city(),
                 player.state(),
                 player.country(),
-                player.createdAt(),
-                player.updatedAt()
+                player.wins() != null ? player.wins() : 0,
+                player.losses() != null ? player.losses() : 0,
+                player.winRate() != null ? player.winRate() : 0.0
         );
     }
 
@@ -36,8 +37,11 @@ public class PlayerMapper {
                 playerDto.city(),
                 playerDto.state(),
                 playerDto.country(),
-                playerDto.createdAt(),
-                playerDto.updatedAt()
+                null,
+                null,
+                playerDto.wins(),
+                playerDto.losses(),
+                playerDto.winRate()
         );
     }
 }
