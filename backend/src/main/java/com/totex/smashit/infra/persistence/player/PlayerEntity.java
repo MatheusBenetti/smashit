@@ -27,6 +27,7 @@ public class PlayerEntity {
     @Column(unique = true, nullable = false)
     private String username;
 
+    @Column(nullable = false)
     private String password;
 
     @Column(unique = true)
@@ -48,6 +49,29 @@ public class PlayerEntity {
     private String country;
 
     private LocalDateTime createdAt;
-
     private LocalDateTime updatedAt;
+
+    @Column(nullable = false)
+    private Integer wins = 0;
+
+    @Column(nullable = false)
+    private Integer losses = 0;
+
+    private Double winRate;
+
+    @Transient
+    public Double getWinRate() {
+        int total = wins + losses;
+        return total == 0 ? 0.0 : (wins * 100.0) / total;
+    }
+
+    @PrePersist
+    protected void onCreate() {
+        createdAt = LocalDateTime.now();
+    }
+
+    @PreUpdate
+    protected void onUpdate() {
+        updatedAt = LocalDateTime.now();
+    }
 }
