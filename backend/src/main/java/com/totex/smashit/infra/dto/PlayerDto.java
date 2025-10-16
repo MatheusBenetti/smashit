@@ -1,22 +1,40 @@
 package com.totex.smashit.infra.dto;
 
 import com.totex.smashit.core.enums.PlayerLevel;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotNull;
-
-import java.time.LocalDateTime;
+import jakarta.validation.constraints.*;
 
 public record PlayerDto(
         Long id,
-        @NotNull String name,
-        @NotNull String username,
-        @NotNull  String password,
-        @Email String email,
+
+        @NotBlank(message = "Name is required")
+        String name,
+
+        @NotBlank(message = "Username is required")
+        String username,
+
+        @NotBlank(message = "Password is required")
+        @Size(min = 6, message = "Password must be at least 6 characters long")
+        String password,
+
+        @Email(message = "Invalid email format")
+        String email,
+
+        @Pattern(regexp = "\\d{10,15}", message = "Phone must contain only digits")
         String phone,
+
+        @NotNull(message = "Player level is required")
         PlayerLevel playerLevel,
-        @NotNull String city,
-        @NotNull String state,
-        @NotNull String country,
-        LocalDateTime createdAt,
-        LocalDateTime updatedAt
+
+        @NotBlank(message = "City is required")
+        String city,
+
+        @NotBlank(message = "State is required")
+        String state,
+
+        @NotBlank(message = "Country is required")
+        String country,
+
+        Integer wins,
+        Integer losses,
+        Double winRate
 ) {}
