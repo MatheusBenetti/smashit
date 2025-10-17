@@ -7,6 +7,8 @@ import com.totex.smashit.infra.persistence.match.MatchEntity;
 import com.totex.smashit.infra.persistence.match.MatchRepository;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 public class MatchRepositoryGateway implements MatchGateway {
 
@@ -23,5 +25,10 @@ public class MatchRepositoryGateway implements MatchGateway {
         MatchEntity entity = matchEntityMapper.toEntity(match);
         MatchEntity newMatch = matchRepository.save(entity);
         return matchEntityMapper.toDomain(newMatch);
+    }
+
+    @Override
+    public List<Match> findMatch() {
+        return matchRepository.findAll().stream().map(matchEntityMapper::toDomain).toList();
     }
 }
