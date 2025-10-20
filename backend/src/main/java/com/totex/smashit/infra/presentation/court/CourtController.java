@@ -5,6 +5,7 @@ import com.totex.smashit.core.usecases.court.CreateCourtUseCase;
 import com.totex.smashit.infra.dto.CourtDto;
 import com.totex.smashit.infra.mapper.court.CourtMapper;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -23,6 +24,7 @@ public class CourtController {
         this.courtMapper = courtMapper;
     }
 
+    @PostMapping("create-court")
     public ResponseEntity<Map<String, Object>> createCourt(CourtDto courtDto) {
         Court newCourt = createCourtUseCase.execute(courtMapper.toDomain(courtDto));
         Map<String, Object> response = new HashMap<>();
@@ -31,4 +33,6 @@ public class CourtController {
         response.put("Court data: ", courtMapper.toDto(newCourt));
         return ResponseEntity.ok(response);
     }
+
+
 }
