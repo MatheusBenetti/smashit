@@ -7,6 +7,8 @@ import com.totex.smashit.infra.persistence.court.CourtEntity;
 import com.totex.smashit.infra.persistence.court.CourtRepository;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 public class CourtRepositoryGateway implements CourtGateway {
 
@@ -23,5 +25,10 @@ public class CourtRepositoryGateway implements CourtGateway {
         CourtEntity entity = courtEntityMapper.toEntity(court);
         CourtEntity newCourt = courtRepository.save(entity);
         return courtEntityMapper.toDomain(newCourt);
+    }
+
+    @Override
+    public List<Court> findCourts() {
+        return courtRepository.findAll().stream().map(courtEntityMapper::toDomain).toList();
     }
 }
