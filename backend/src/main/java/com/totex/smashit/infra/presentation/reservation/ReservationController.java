@@ -5,6 +5,7 @@ import com.totex.smashit.core.usecases.reservation.CreateReservationUseCase;
 import com.totex.smashit.infra.dto.ReservationDto;
 import com.totex.smashit.infra.mapper.reservation.ReservationMapper;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,6 +25,7 @@ public class ReservationController {
         this.reservationMapper = reservationMapper;
     }
 
+    @PostMapping("create-reservation")
     public ResponseEntity<Map<String, Object>> createReservation(@RequestBody ReservationDto reservationDto) {
         Reservation newReservation = createReservationUseCase.execute(reservationMapper.toDomain(reservationDto));
         Map<String, Object> response = new HashMap<>();
