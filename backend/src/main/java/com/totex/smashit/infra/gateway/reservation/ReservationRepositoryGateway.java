@@ -7,6 +7,8 @@ import com.totex.smashit.infra.persistence.reservation.ReservationEntity;
 import com.totex.smashit.infra.persistence.reservation.ReservationRepository;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 public class ReservationRepositoryGateway implements ReservationGateway {
 
@@ -23,5 +25,10 @@ public class ReservationRepositoryGateway implements ReservationGateway {
         ReservationEntity entity = reservationEntityMapper.toEntity(reservation);
         ReservationEntity newReservation = reservationRepository.save(entity);
         return reservationEntityMapper.toDomain(newReservation);
+    }
+
+    @Override
+    public List<Reservation> findReservations() {
+        return reservationRepository.findAll().stream().map(reservationEntityMapper::toDomain).toList();
     }
 }
