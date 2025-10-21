@@ -12,10 +12,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @RestController
 @RequestMapping("api/v1/")
 public class ReservationController {
+
+    private static final Logger log = LoggerFactory.getLogger(ReservationController.class);
 
     private final CreateReservationUseCase createReservationUseCase;
     private final FindReservationsUseCase findReservationsUseCase;
@@ -31,12 +35,19 @@ public class ReservationController {
 
     @PostMapping("create-reservation")
     public ResponseEntity<Map<String, Object>> createReservation(@RequestBody ReservationDto reservationDto) {
-        Reservation newReservation = createReservationUseCase.execute(reservationMapper.toDomain(reservationDto));
-        Map<String, Object> response = new HashMap<>();
+        log.info("Start creating new reservation: {}", reservationDto);
+        try {
+            Reservation newReservation = createReservationUseCase.execute(reservationMapper.toDomain(reservationDto));
+            Map<String, Object> response = new HashMap<>();
 
-        response.put("Message: ", "Reservation created successfully!");
-        response.put("Reservation data: ", reservationMapper.toDto(newReservation));
-        return ResponseEntity.ok(response);
+            response.put("Message: ", "Reservation created successfully!");
+            response.put("Reservation data: ", reservationMapper.toDto(newReservation));
+            log.info("Reservation created successfully! {}", newReservation.id());
+            return ResponseEntity.ok(response);
+        } catch (Exception e) {
+            log.error("Error while creating match", e);
+            throw e;
+        }
     }
 
     @GetMapping("find-reservations")
