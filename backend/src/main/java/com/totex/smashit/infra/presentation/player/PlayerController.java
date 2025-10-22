@@ -12,10 +12,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @RestController
 @RequestMapping("api/v1/")
 public class PlayerController {
+
+    private static final Logger log = LoggerFactory.getLogger(PlayerController.class);
 
     private final CreatePlayerUseCase createPlayerUseCase;
     private final FindPlayerUseCase findPlayerUseCase;
@@ -31,12 +35,19 @@ public class PlayerController {
 
     @PostMapping("create-player")
     public ResponseEntity<Map<String, Object>> createPlayer(@RequestBody PlayerDto playerDto) {
-        Player newPlayer = createPlayerUseCase.execute(playerMapper.toDomain(playerDto));
-        Map<String, Object> response = new HashMap<>();
+        log.info("Start creating new player: {}", playerDto);
+        try {
+            Player newPlayer = createPlayerUseCase.execute(playerMapper.toDomain(playerDto));
+            Map<String, Object> response = new HashMap<>();
 
-        response.put("Message: ", "Player added successfully!");
-        response.put("Player data: ", playerMapper.toDto(newPlayer));
-        return ResponseEntity.ok(response);
+            response.put("Message: ", "Player added successfully!");
+            response.put("Player data: ", playerMapper.toDto(newPlayer));
+            log.info("Player created successfully: {}", newPlayer.id());
+            return ResponseEntity.ok(response);
+        } catch (RuntimeException e) {
+            log.error("Error while creating player", e);
+            throw e;
+        }
     }
 
     @GetMapping("find-players")
