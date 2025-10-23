@@ -15,10 +15,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @RestController
 @RequestMapping("api/v1/")
 public class CourtController {
+
+    private static final Logger log = LoggerFactory.getLogger(CourtController.class);
 
     private final CreateCourtUseCase createCourtUseCase;
     private final FindCourtUseCase findCourtUseCase;
@@ -34,12 +38,19 @@ public class CourtController {
 
     @PostMapping("create-court")
     public ResponseEntity<Map<String, Object>> createCourt(CourtDto courtDto) {
-        Court newCourt = createCourtUseCase.execute(courtMapper.toDomain(courtDto));
-        Map<String, Object> response = new HashMap<>();
+        log.info("Creating court: {}", courtDto);
+        try {
+            Court newCourt = createCourtUseCase.execute(courtMapper.toDomain(courtDto));
+            Map<String, Object> response = new HashMap<>();
 
-        response.put("Message: ", "Court created successfully!");
-        response.put("Court data: ", courtMapper.toDto(newCourt));
-        return ResponseEntity.ok(response);
+            response.put("Message: ", "Court created successfully!");
+            response.put("Court data: ", courtMapper.toDto(newCourt));
+            log.info("Court created successfully: {}", newCourt.id());
+            return ResponseEntity.ok(response);
+        } catch (Exception e) {
+            log.error("Error while creating court", e);;
+            throw e;
+        }
     }
 
     @GetMapping("find-courts")
