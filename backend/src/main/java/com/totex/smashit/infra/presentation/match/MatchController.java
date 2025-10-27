@@ -12,10 +12,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @RestController
 @RequestMapping("api/v1/")
 public class MatchController {
+
+    private static final Logger log = LoggerFactory.getLogger(MatchController.class);
 
     private final CreateMatchUseCase createMatchUseCase;
     private final FindMatchUseCase findMatchUseCase;
@@ -31,12 +35,19 @@ public class MatchController {
 
     @PostMapping("create-match")
     public ResponseEntity<Map<String, Object>> createMatch(@RequestBody MatchDto matchDto) {
-        Match newMatch = createMatchUseCase.execute(matchMapper.toDomain(matchDto));
-        Map<String, Object> response = new HashMap<>();
+        log.info("Creating tennis match: {}", matchDto);
+        try {
+            Match newMatch = createMatchUseCase.execute(matchMapper.toDomain(matchDto));
+            Map<String, Object> response = new HashMap<>();
 
-        response.put("Message: ", "Match created successfully!");
-        response.put("Match data: ", matchMapper.toDto(newMatch));
-        return ResponseEntity.ok(response);
+            response.put("Message: ", "Match created successfully!");
+            response.put("Match data: ", matchMapper.toDto(newMatch));
+            log.info("Match created successfully: {}", newMatch.id());
+            return ResponseEntity.ok(response);
+        } catch (Exception e) {
+            log.error("Error occurred while creating match: {}", e.getMessage());
+            throw e;
+        }
     }
 
     @GetMapping("find-matches")
