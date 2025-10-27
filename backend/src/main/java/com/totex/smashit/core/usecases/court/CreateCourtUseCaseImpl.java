@@ -8,7 +8,7 @@ import org.slf4j.LoggerFactory;
 
 public class CreateCourtUseCaseImpl implements CreateCourtUseCase {
 
-    public static final Logger log = LoggerFactory.getLogger(CreateCourtUseCaseImpl.class);
+    private static final Logger log = LoggerFactory.getLogger(CreateCourtUseCaseImpl.class);
 
     private final CourtGateway courtGateway;
 
