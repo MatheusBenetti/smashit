@@ -31,4 +31,9 @@ public class PlayerRepositoryGateway implements PlayerGateway {
     public List<Player> findPlayer() {
         return playerRepository.findAll().stream().map(playerEntityMapper::toDomain).toList();
     }
+
+    @Override
+    public Player updatePlayer(Player player) {
+        return null;
+    }
 }
