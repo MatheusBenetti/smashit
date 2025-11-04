@@ -8,4 +8,5 @@ public interface MatchGateway {
 
     Match createMatch(Match match);
     List<Match> findMatch();
+    Match updateMatch(Match match);
 }
