@@ -31,4 +31,9 @@ public class MatchRepositoryGateway implements MatchGateway {
     public List<Match> findMatch() {
         return matchRepository.findAll().stream().map(matchEntityMapper::toDomain).toList();
     }
+
+    @Override
+    public Match updateMatch(Match match) {
+        return null;
+    }
 }
