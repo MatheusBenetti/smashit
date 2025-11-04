@@ -21,7 +21,7 @@ public class UpdatePlayerUseCaseImpl implements UpdatePlayerUseCase {
         log.info("Updating player: {}", player.name());
         try {
             Player updatedPlayer = playerGateway.updatePlayer(player);
-            log.info("Player updated: {}", player);
+            log.info("Player updated: {}", updatedPlayer);
             return updatedPlayer;
         } catch (Exception e) {
             log.error("Error while updating player: {}! Error message: {}", player.name(), e.getMessage());
