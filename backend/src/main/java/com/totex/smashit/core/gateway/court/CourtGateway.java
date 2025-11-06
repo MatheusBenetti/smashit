@@ -8,4 +8,5 @@ public interface CourtGateway {
 
     Court createCourt(Court court);
     List<Court> findCourts();
+    Court updateCourt(Court court);
 }
