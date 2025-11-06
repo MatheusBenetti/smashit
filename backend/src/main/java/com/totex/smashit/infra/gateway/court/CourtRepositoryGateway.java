@@ -31,4 +31,9 @@ public class CourtRepositoryGateway implements CourtGateway {
     public List<Court> findCourts() {
         return courtRepository.findAll().stream().map(courtEntityMapper::toDomain).toList();
     }
+
+    @Override
+    public Court updateCourt(Court court) {
+        return null;
+    }
 }
