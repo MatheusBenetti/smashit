@@ -8,4 +8,5 @@ public interface ReservationGateway {
 
     public Reservation createReservation(Reservation reservation);
     public List<Reservation> findReservations();
+    public Reservation updateReservation(Reservation reservation);
 }
