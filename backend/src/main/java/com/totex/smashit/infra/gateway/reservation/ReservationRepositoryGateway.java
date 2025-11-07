@@ -31,4 +31,9 @@ public class ReservationRepositoryGateway implements ReservationGateway {
     public List<Reservation> findReservations() {
         return reservationRepository.findAll().stream().map(reservationEntityMapper::toDomain).toList();
     }
+
+    @Override
+    public Reservation updateReservation(Reservation reservation) {
+        return null;
+    }
 }
