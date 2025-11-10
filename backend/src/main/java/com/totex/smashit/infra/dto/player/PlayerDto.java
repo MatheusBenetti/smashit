@@ -1,4 +1,4 @@
-package com.totex.smashit.infra.dto;
+package com.totex.smashit.infra.dto.player;
 
 import com.totex.smashit.core.enums.PlayerLevel;
 import jakarta.validation.constraints.*;
