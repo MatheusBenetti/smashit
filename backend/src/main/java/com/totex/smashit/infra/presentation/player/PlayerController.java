@@ -3,7 +3,7 @@ package com.totex.smashit.infra.presentation.player;
 import com.totex.smashit.core.entities.player.Player;
 import com.totex.smashit.core.usecases.player.CreatePlayerUseCase;
 import com.totex.smashit.core.usecases.player.FindPlayerUseCase;
-import com.totex.smashit.infra.dto.PlayerDto;
+import com.totex.smashit.infra.dto.player.PlayerDto;
 import com.totex.smashit.infra.mapper.player.PlayerMapper;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
