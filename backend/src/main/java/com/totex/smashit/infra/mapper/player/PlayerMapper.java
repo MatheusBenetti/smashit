@@ -1,7 +1,7 @@
 package com.totex.smashit.infra.mapper.player;
 
 import com.totex.smashit.core.entities.player.Player;
-import com.totex.smashit.infra.dto.PlayerDto;
+import com.totex.smashit.infra.dto.player.PlayerDto;
 import org.springframework.stereotype.Component;
 
 @Component
