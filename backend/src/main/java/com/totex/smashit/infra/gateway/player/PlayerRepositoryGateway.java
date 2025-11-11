@@ -2,6 +2,7 @@ package com.totex.smashit.infra.gateway.player;
 
 import com.totex.smashit.core.entities.player.Player;
 import com.totex.smashit.core.gateway.player.PlayerGateway;
+import com.totex.smashit.infra.exceptions.ResourceNotFoundException;
 import com.totex.smashit.infra.mapper.player.PlayerEntityMapper;
 import com.totex.smashit.infra.persistence.player.PlayerEntity;
 import com.totex.smashit.infra.persistence.player.PlayerRepository;
@@ -33,7 +34,23 @@ public class PlayerRepositoryGateway implements PlayerGateway {
     }
 
     @Override
-    public Player updatePlayer(Player player) {
-        return null;
+    public Player updatePlayer(Long id, Player player) {
+        PlayerEntity existing = playerRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Player not found with ID: " + id));
+
+        existing.setName(player.name());
+        existing.setUsername(player.username());
+        existing.setEmail(player.email());
+        existing.setPhone(player.phone());
+        existing.setPlayerLevel(player.playerLevel());
+        existing.setCity(player.city());
+        existing.setState(player.state());
+        existing.setCountry(player.country());
+        existing.setWins(player.wins());
+        existing.setLosses(player.losses());
+        existing.setWinRate(player.winRate());
+
+        PlayerEntity updated = playerRepository.save(existing);
+        return playerEntityMapper.toDomain(updated);
     }
 }
