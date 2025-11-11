@@ -4,5 +4,5 @@ import com.totex.smashit.core.entities.player.Player;
 
 public interface UpdatePlayerUseCase {
 
-    public Player execute(Player player);
+    public Player execute(Long id, Player player);
 }
