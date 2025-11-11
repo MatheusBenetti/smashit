@@ -1,8 +1,11 @@
 package com.totex.smashit.infra.mapper.player;
 
 import com.totex.smashit.core.entities.player.Player;
+import com.totex.smashit.infra.dto.player.UpdatePlayerRequest;
 import com.totex.smashit.infra.persistence.player.PlayerEntity;
 import org.springframework.stereotype.Component;
+
+import java.time.LocalDateTime;
 
 @Component
 public class PlayerEntityMapper {
@@ -44,6 +47,26 @@ public class PlayerEntityMapper {
                 playerEntity.getWins(),
                 playerEntity.getLosses(),
                 playerEntity.getWinRate()
+        );
+    }
+
+    public Player updateToDomain(UpdatePlayerRequest updatePlayerRequest) {
+        return new Player(
+                null,
+                updatePlayerRequest.name(),
+                updatePlayerRequest.username(),
+                null,
+                updatePlayerRequest.email(),
+                updatePlayerRequest.phone(),
+                updatePlayerRequest.playerLevel(),
+                updatePlayerRequest.city(),
+                updatePlayerRequest.state(),
+                updatePlayerRequest.country(),
+                null,
+                LocalDateTime.now(),
+                updatePlayerRequest.wins(),
+                updatePlayerRequest.losses(),
+                updatePlayerRequest.winRate()
         );
     }
 }
