@@ -17,10 +17,10 @@ public class UpdatePlayerUseCaseImpl implements UpdatePlayerUseCase {
     }
 
     @Override
-    public Player execute(Player player) {
-        log.info("Updating player: {}", player.name());
+    public Player execute(Long id, Player player) {
+        log.info("Updating player: {}", id);
         try {
-            Player updatedPlayer = playerGateway.updatePlayer(player);
+            Player updatedPlayer = playerGateway.updatePlayer(id, player);
             log.info("Player updated: {}", updatedPlayer);
             return updatedPlayer;
         } catch (Exception e) {
