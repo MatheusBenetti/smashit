@@ -1,10 +1,7 @@
 package com.totex.smashit.infra.beans.player;
 
 import com.totex.smashit.core.gateway.player.PlayerGateway;
-import com.totex.smashit.core.usecases.player.CreatePlayerUseCase;
-import com.totex.smashit.core.usecases.player.CreatePlayerUseCaseImpl;
-import com.totex.smashit.core.usecases.player.FindPlayerUseCase;
-import com.totex.smashit.core.usecases.player.FindPlayerUseCaseImpl;
+import com.totex.smashit.core.usecases.player.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -19,5 +16,10 @@ public class PlayerBeansConfiguration {
     @Bean
     public FindPlayerUseCase findPlayerUseCase(PlayerGateway playerGateway) {
         return new FindPlayerUseCaseImpl(playerGateway);
+    }
+
+    @Bean
+    public UpdatePlayerUseCase updatePlayerUseCase(PlayerGateway playerGateway) {
+        return new UpdatePlayerUseCaseImpl(playerGateway);
     }
 }
