@@ -1,10 +1,7 @@
 package com.totex.smashit.infra.beans.court;
 
 import com.totex.smashit.core.gateway.court.CourtGateway;
-import com.totex.smashit.core.usecases.court.CreateCourtUseCase;
-import com.totex.smashit.core.usecases.court.CreateCourtUseCaseImpl;
-import com.totex.smashit.core.usecases.court.FindCourtUseCase;
-import com.totex.smashit.core.usecases.court.FindCourtUseCaseImpl;
+import com.totex.smashit.core.usecases.court.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -19,5 +16,10 @@ public class CourtBeansConfiguration {
     @Bean
     public FindCourtUseCase findCourtUseCase(CourtGateway courtGateway) {
         return new FindCourtUseCaseImpl(courtGateway);
+    }
+
+    @Bean
+    public UpdateCourtUseCase updateCourtUseCase(CourtGateway courtGateway) {
+        return new UpdateCourtUseCaseImpl(courtGateway);
     }
 }
