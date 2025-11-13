@@ -15,5 +15,4 @@ public record UpdatePlayerRequest(
         Integer wins,
         Integer losses,
         Double winRate
-) {
-}
+) {}
