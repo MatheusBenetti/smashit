@@ -2,6 +2,7 @@ package com.totex.smashit.infra.gateway.court;
 
 import com.totex.smashit.core.entities.court.Court;
 import com.totex.smashit.core.gateway.court.CourtGateway;
+import com.totex.smashit.infra.exceptions.ResourceNotFoundException;
 import com.totex.smashit.infra.mapper.court.CourtEntityMapper;
 import com.totex.smashit.infra.persistence.court.CourtEntity;
 import com.totex.smashit.infra.persistence.court.CourtRepository;
@@ -33,7 +34,18 @@ public class CourtRepositoryGateway implements CourtGateway {
     }
 
     @Override
-    public Court updateCourt(Court court) {
-        return null;
+    public Court updateCourt(Long id, Court court) {
+        CourtEntity existing = courtRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Court not found with id: " + id));
+
+        existing.setName(court.name());
+        existing.setCourtType(court.courtType());
+        existing.setAddress(court.address());
+        existing.setCity(court.city());
+        existing.setState(court.state());
+        existing.setClub(court.club());
+
+        CourtEntity updated = courtRepository.save(existing);
+        return courtEntityMapper.toDomain(updated);
     }
 }
