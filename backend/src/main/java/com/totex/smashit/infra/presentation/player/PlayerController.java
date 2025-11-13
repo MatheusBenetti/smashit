@@ -68,8 +68,8 @@ public class PlayerController {
 
             Map<String, Object> response = new HashMap<>();
 
-            response.put("message", "Player updated successfully!");
-            response.put("player", playerMapper.toDto(updatedPlayer));
+            response.put("Message: ", "Player updated successfully!");
+            response.put("Player: ", playerMapper.toDto(updatedPlayer));
 
             log.info("Player with ID {} updated successfully", id);
             return ResponseEntity.ok(response);
