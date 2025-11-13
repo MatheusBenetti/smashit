@@ -1,7 +1,8 @@
 package com.totex.smashit.infra.mapper.court;
 
 import com.totex.smashit.core.entities.court.Court;
-import com.totex.smashit.infra.dto.CourtDto;
+import com.totex.smashit.infra.dto.court.CourtDto;
+import com.totex.smashit.infra.dto.court.UpdateCourtRequest;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -28,6 +29,18 @@ public class CourtMapper {
                 courtDto.city(),
                 courtDto.state(),
                 courtDto.club()
+        );
+    }
+
+    public Court entityToDomain(UpdateCourtRequest updateCourtRequest) {
+        return new Court(
+                null,
+                updateCourtRequest.name(),
+                updateCourtRequest.courtType(),
+                updateCourtRequest.address(),
+                updateCourtRequest.city(),
+                updateCourtRequest.state(),
+                updateCourtRequest.club()
         );
     }
 }
