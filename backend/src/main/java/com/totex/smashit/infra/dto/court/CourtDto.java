@@ -1,4 +1,4 @@
-package com.totex.smashit.infra.dto;
+package com.totex.smashit.infra.dto.court;
 
 import com.totex.smashit.core.enums.CourtType;
 
