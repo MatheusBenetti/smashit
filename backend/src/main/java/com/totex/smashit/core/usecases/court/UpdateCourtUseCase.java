@@ -4,5 +4,5 @@ import com.totex.smashit.core.entities.court.Court;
 
 public interface UpdateCourtUseCase {
 
-    public Court execute(Court court);
+    public Court execute(Long id, Court court);
 }

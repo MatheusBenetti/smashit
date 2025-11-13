@@ -16,14 +16,14 @@ public class UpdateCourtUseCaseImpl implements UpdateCourtUseCase {
     }
 
     @Override
-    public Court execute(Court court) {
-        log.info("Updating court: {}", court.id());
+    public Court execute(Long id, Court court) {
+        log.info("Updating court: {}", id);
         try {
-            Court updatedCourt = courtGateway.updateCourt(court);
+            Court updatedCourt = courtGateway.updateCourt(id, court);
             log.info("Court updated successfully: {}", updatedCourt);
             return updatedCourt;
         } catch (Exception e) {
-            log.error("Error while updating court ID: {}, error: {}", court.id(), e.getMessage());
+            log.error("Error while updating court ID: {}, error: {}", id, e.getMessage());
             throw e;
         }
     }
