@@ -62,7 +62,7 @@ public class CourtController {
 
     @PutMapping("update-court/{id}")
     public ResponseEntity<Map<String, Object>> updateCourt(@PathVariable Long id, @RequestBody UpdateCourtRequest updateCourtRequest) {
-        log.info("Received request to update player with ID: {}", id);
+        log.info("Received request to update court with ID: {}", id);
         try {
             Court updatedCourt = updateCourtUseCase.execute(id, courtMapper.entityToDomain(updateCourtRequest));
 
@@ -73,7 +73,7 @@ public class CourtController {
             log.info("Court with ID {} updated successfully", id);
             return ResponseEntity.ok(response);
         } catch (Exception e) {
-            log.error("Error updating player with ID: {}. Error: {}", id, e.getMessage());
+            log.error("Error updating court with ID: {}. Error: {}", id, e.getMessage());
             throw e;
         }
     }
