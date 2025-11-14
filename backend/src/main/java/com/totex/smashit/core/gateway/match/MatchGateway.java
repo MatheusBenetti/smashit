@@ -8,5 +8,5 @@ public interface MatchGateway {
 
     Match createMatch(Match match);
     List<Match> findMatch();
-    Match updateMatch(Match match);
+    Match updateMatch(Long id, Match match, Long courtId, List<Long> playerIds);
 }
