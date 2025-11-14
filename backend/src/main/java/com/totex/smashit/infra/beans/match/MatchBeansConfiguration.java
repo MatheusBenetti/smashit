@@ -1,10 +1,7 @@
 package com.totex.smashit.infra.beans.match;
 
 import com.totex.smashit.core.gateway.match.MatchGateway;
-import com.totex.smashit.core.usecases.match.CreateMatchUseCase;
-import com.totex.smashit.core.usecases.match.CreateMatchUseCaseImpl;
-import com.totex.smashit.core.usecases.match.FindMatchUseCase;
-import com.totex.smashit.core.usecases.match.FindMatchUseCaseImpl;
+import com.totex.smashit.core.usecases.match.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -19,5 +16,10 @@ public class MatchBeansConfiguration {
     @Bean
     public FindMatchUseCase findMatchUseCase(MatchGateway matchGateway) {
         return new FindMatchUseCaseImpl(matchGateway);
+    }
+
+    @Bean
+    public UpdateMatchUseCase updateMatchUseCase(MatchGateway matchGateway) {
+        return new UpdateMatchUseCaseImpl(matchGateway);
     }
 }
