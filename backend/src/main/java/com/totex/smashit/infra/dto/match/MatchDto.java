@@ -1,4 +1,4 @@
-package com.totex.smashit.infra.dto;
+package com.totex.smashit.infra.dto.match;
 
 import com.totex.smashit.core.entities.court.Court;
 import com.totex.smashit.core.entities.player.Player;
