@@ -1,7 +1,8 @@
 package com.totex.smashit.infra.mapper.match;
 
 import com.totex.smashit.core.entities.match.Match;
-import com.totex.smashit.infra.dto.MatchDto;
+import com.totex.smashit.infra.dto.match.MatchDto;
+import com.totex.smashit.infra.dto.match.UpdateMatchRequest;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -13,5 +14,17 @@ public class MatchMapper {
 
     public Match toDomain(MatchDto matchDto) {
         return new Match(matchDto.id(), matchDto.date(), matchDto.hour(), matchDto.courtId(), matchDto.players(), matchDto.matchStatus(), matchDto.matchType());
+    }
+
+    public Match updateToDomain(UpdateMatchRequest updateMatchRequest) {
+        return new Match(
+                null,
+                updateMatchRequest.date(),
+                updateMatchRequest.hour(),
+                null,
+                null,
+                updateMatchRequest.matchStatus(),
+                updateMatchRequest.matchType()
+        );
     }
 }
