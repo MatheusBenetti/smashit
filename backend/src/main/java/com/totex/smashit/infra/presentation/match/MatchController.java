@@ -1,9 +1,12 @@
 package com.totex.smashit.infra.presentation.match;
 
 import com.totex.smashit.core.entities.match.Match;
+import com.totex.smashit.core.usecases.court.UpdateCourtUseCase;
 import com.totex.smashit.core.usecases.match.CreateMatchUseCase;
 import com.totex.smashit.core.usecases.match.FindMatchUseCase;
-import com.totex.smashit.infra.dto.MatchDto;
+import com.totex.smashit.core.usecases.match.UpdateMatchUseCase;
+import com.totex.smashit.infra.dto.match.MatchDto;
+import com.totex.smashit.infra.dto.match.UpdateMatchRequest;
 import com.totex.smashit.infra.mapper.match.MatchMapper;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -23,13 +26,16 @@ public class MatchController {
 
     private final CreateMatchUseCase createMatchUseCase;
     private final FindMatchUseCase findMatchUseCase;
+    private final UpdateMatchUseCase updateMatchUseCase;
     private final MatchMapper matchMapper;
 
     public MatchController(CreateMatchUseCase createMatchUseCase,
                            FindMatchUseCase findMatchUseCase,
+                           UpdateMatchUseCase updateMatchUseCase,
                            MatchMapper matchMapper) {
         this.createMatchUseCase = createMatchUseCase;
         this.findMatchUseCase = findMatchUseCase;
+        this.updateMatchUseCase = updateMatchUseCase;
         this.matchMapper = matchMapper;
     }
 
@@ -53,5 +59,23 @@ public class MatchController {
     @GetMapping("find-matches")
     public List<MatchDto> findGames() {
         return findMatchUseCase.execute().stream().map(matchMapper::toDto).collect(Collectors.toList());
+    }
+
+    @PutMapping("update-match/{id}")
+    public ResponseEntity<Map<String, Object>> updateMatch(@PathVariable Long id, @RequestBody UpdateMatchRequest updateMatchRequest) {
+        log.info("Received request to update match with ID: {}", id);
+        try {
+            Match updatedMatch = updateMatchUseCase.execute(id, matchMapper.updateToDomain(updateMatchRequest), updateMatchRequest.courtId(), updateMatchRequest.players());
+
+            Map<String, Object> response = new HashMap<>();
+            response.put("Message: ", "Match updated successfully!");
+            response.put("Match: ", matchMapper.toDto(updatedMatch));
+
+            log.info("Match with ID {} updated successfully", id);
+            return ResponseEntity.ok(response);
+        } catch (Exception e) {
+            log.error("Error updating match with ID: {}. Error: {}", id, e.getMessage());
+            throw e;
+        }
     }
 }
