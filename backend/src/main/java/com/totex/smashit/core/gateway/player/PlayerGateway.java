@@ -9,4 +9,5 @@ public interface PlayerGateway {
     Player createPlayer(Player player);
     List<Player> findPlayer();
     Player updatePlayer(Long id, Player player);
+    Player findById(Long id);
 }
