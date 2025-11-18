@@ -53,4 +53,12 @@ public class PlayerRepositoryGateway implements PlayerGateway {
         PlayerEntity updated = playerRepository.save(existing);
         return playerEntityMapper.toDomain(updated);
     }
+
+    @Override
+    public Player findById(Long id) {
+        PlayerEntity existing = playerRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Player not found with ID: " + id));
+
+        return playerEntityMapper.toDomain(existing);
+    }
 }
