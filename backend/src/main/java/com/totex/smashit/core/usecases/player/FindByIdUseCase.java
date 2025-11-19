@@ -4,5 +4,5 @@ import com.totex.smashit.core.entities.player.Player;
 
 public interface FindByIdUseCase {
 
-    public Player findById(Long id);
+    public Player execute(Long id);
 }
