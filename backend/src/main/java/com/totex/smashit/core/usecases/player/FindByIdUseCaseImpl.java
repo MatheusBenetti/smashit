@@ -17,7 +17,7 @@ public class FindByIdUseCaseImpl implements FindByIdUseCase {
     }
 
     @Override
-    public Player findById(Long id) {
+    public Player execute(Long id) {
         log.info("Finding player with ID: {}", id);
         try {
             Player found = playerGateway.findById(id);
