@@ -67,4 +67,12 @@ public class MatchRepositoryGateway implements MatchGateway {
         MatchEntity updated = matchRepository.save(existing);
         return matchEntityMapper.toDomain(updated);
     }
+
+    @Override
+    public Match findByMatchId(Long id) {
+        MatchEntity existing = matchRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Match not found with ID: " + id));
+
+        return matchEntityMapper.toDomain(existing);
+    }
 }
