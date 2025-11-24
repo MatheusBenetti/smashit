@@ -22,4 +22,9 @@ public class MatchBeansConfiguration {
     public UpdateMatchUseCase updateMatchUseCase(MatchGateway matchGateway) {
         return new UpdateMatchUseCaseImpl(matchGateway);
     }
+
+    @Bean
+    public FindMatchByIdUseCase findMatchByIdUseCase(MatchGateway matchGateway) {
+        return new FindMatchByIdUseCaseImpl(matchGateway);
+    }
 }
