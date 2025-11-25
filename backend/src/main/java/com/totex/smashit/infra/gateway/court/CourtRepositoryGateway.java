@@ -48,4 +48,12 @@ public class CourtRepositoryGateway implements CourtGateway {
         CourtEntity updated = courtRepository.save(existing);
         return courtEntityMapper.toDomain(updated);
     }
+
+    @Override
+    public Court findCourtById(Long id) {
+        CourtEntity existing = courtRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Court not found with id: " + id));
+
+        return courtEntityMapper.toDomain(existing);
+    }
 }
