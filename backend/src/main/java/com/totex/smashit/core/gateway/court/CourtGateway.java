@@ -9,4 +9,5 @@ public interface CourtGateway {
     Court createCourt(Court court);
     List<Court> findCourts();
     Court updateCourt(Long id, Court court);
+    Court findCourtById(Long id);
 }
