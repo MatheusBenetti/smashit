@@ -22,4 +22,9 @@ public class CourtBeansConfiguration {
     public UpdateCourtUseCase updateCourtUseCase(CourtGateway courtGateway) {
         return new UpdateCourtUseCaseImpl(courtGateway);
     }
+
+    @Bean
+    public FindCourtByIdUseCase findCourtByIdUseCase(CourtGateway courtGateway) {
+        return new FindCourtByIdUseCaseImpl(courtGateway);
+    }
 }
