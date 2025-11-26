@@ -2,7 +2,7 @@ package com.totex.smashit.infra.presentation.player;
 
 import com.totex.smashit.core.entities.player.Player;
 import com.totex.smashit.core.usecases.player.CreatePlayerUseCase;
-import com.totex.smashit.core.usecases.player.FindByIdUseCase;
+import com.totex.smashit.core.usecases.player.FindPlayerByIdUseCase;
 import com.totex.smashit.core.usecases.player.FindPlayerUseCase;
 import com.totex.smashit.core.usecases.player.UpdatePlayerUseCase;
 import com.totex.smashit.infra.dto.player.PlayerDto;
@@ -26,18 +26,18 @@ public class PlayerController {
 
     private final CreatePlayerUseCase createPlayerUseCase;
     private final FindPlayerUseCase findPlayerUseCase;
-    private final FindByIdUseCase findByIdUseCase;
+    private final FindPlayerByIdUseCase findPlayerByIdUseCase;
     private final UpdatePlayerUseCase updatePlayerUseCase;
     private final PlayerMapper playerMapper;
 
     public PlayerController(CreatePlayerUseCase createPlayerUseCase,
                             FindPlayerUseCase findPlayerUseCase,
-                            FindByIdUseCase findByIdUseCase,
+                            FindPlayerByIdUseCase findPlayerByIdUseCase,
                             UpdatePlayerUseCase updatePlayerUseCase,
                             PlayerMapper playerMapper) {
         this.createPlayerUseCase = createPlayerUseCase;
         this.findPlayerUseCase = findPlayerUseCase;
-        this.findByIdUseCase = findByIdUseCase;
+        this.findPlayerByIdUseCase = findPlayerByIdUseCase;
         this.updatePlayerUseCase = updatePlayerUseCase;
         this.playerMapper = playerMapper;
     }
@@ -68,7 +68,7 @@ public class PlayerController {
     public ResponseEntity<PlayerDto> findPlayer(@PathVariable Long id) {
         log.info("Received find request to player with ID: {}", id);
         try {
-            Player found = findByIdUseCase.execute(id);
+            Player found = findPlayerByIdUseCase.execute(id);
             log.info("Player found: {}", found);
             return ResponseEntity.ok(playerMapper.toDto(found));
         } catch (Exception e) {

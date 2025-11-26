@@ -19,8 +19,8 @@ public class PlayerBeansConfiguration {
     }
 
     @Bean
-    public FindByIdUseCase findByIdUseCase(PlayerGateway playerGateway) {
-        return new FindByIdUseCaseImpl(playerGateway);
+    public FindPlayerByIdUseCase findByIdUseCase(PlayerGateway playerGateway) {
+        return new FindPlayerByIdUseCaseImpl(playerGateway);
     }
 
     @Bean
