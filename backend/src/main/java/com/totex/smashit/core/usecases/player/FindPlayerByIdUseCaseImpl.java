@@ -6,13 +6,13 @@ import com.totex.smashit.core.gateway.player.PlayerGateway;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class FindByIdUseCaseImpl implements FindByIdUseCase {
+public class FindPlayerByIdUseCaseImpl implements FindPlayerByIdUseCase {
 
-    private static final Logger log = LoggerFactory.getLogger(FindByIdUseCaseImpl.class);
+    private static final Logger log = LoggerFactory.getLogger(FindPlayerByIdUseCaseImpl.class);
 
     private final PlayerGateway playerGateway;
 
-    public FindByIdUseCaseImpl(PlayerGateway playerGateway) {
+    public FindPlayerByIdUseCaseImpl(PlayerGateway playerGateway) {
         this.playerGateway = playerGateway;
     }
 
