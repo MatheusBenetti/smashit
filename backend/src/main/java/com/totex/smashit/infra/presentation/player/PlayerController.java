@@ -65,7 +65,7 @@ public class PlayerController {
     }
 
     @GetMapping("find-player/{id}")
-    public ResponseEntity<PlayerDto> findPlayer(@PathVariable Long id) {
+    public ResponseEntity<PlayerDto> findPlayerById(@PathVariable Long id) {
         log.info("Received find request to player with ID: {}", id);
         try {
             Player found = findPlayerByIdUseCase.execute(id);
