@@ -2,6 +2,7 @@ package com.totex.smashit.infra.presentation.court;
 
 import com.totex.smashit.core.entities.court.Court;
 import com.totex.smashit.core.usecases.court.CreateCourtUseCase;
+import com.totex.smashit.core.usecases.court.FindCourtByIdUseCase;
 import com.totex.smashit.core.usecases.court.FindCourtUseCase;
 import com.totex.smashit.core.usecases.court.UpdateCourtUseCase;
 import com.totex.smashit.infra.dto.court.CourtDto;
@@ -25,15 +26,18 @@ public class CourtController {
 
     private final CreateCourtUseCase createCourtUseCase;
     private final FindCourtUseCase findCourtUseCase;
+    private final FindCourtByIdUseCase findCourtByIdUseCase;
     private final UpdateCourtUseCase updateCourtUseCase;
     private final CourtMapper courtMapper;
 
     public CourtController(CreateCourtUseCase createCourtUseCase,
                            FindCourtUseCase findCourtUseCase,
+                           FindCourtByIdUseCase findCourtByIdUseCase,
                            UpdateCourtUseCase updateCourtUseCase,
                            CourtMapper courtMapper) {
         this.createCourtUseCase = createCourtUseCase;
         this.findCourtUseCase = findCourtUseCase;
+        this.findCourtByIdUseCase = findCourtByIdUseCase;
         this.updateCourtUseCase = updateCourtUseCase;
         this.courtMapper = courtMapper;
     }
@@ -58,6 +62,19 @@ public class CourtController {
     @GetMapping("find-courts")
     public List<CourtDto> findCourts() {
         return findCourtUseCase.execute().stream().map(courtMapper::toDto).collect(Collectors.toList());
+    }
+
+    @GetMapping("find-player/{id}")
+    public ResponseEntity<CourtDto> findCourtById(@PathVariable Long id) {
+        log.info("Received find request to court with ID: {}", id);
+        try {
+            Court found = findCourtByIdUseCase.execute(id);
+            log.info("Court found: {}", found);
+            return ResponseEntity.ok(courtMapper.toDto(found));
+        } catch (Exception e) {
+            log.error("Error while trying to find court! Error: {}", e.getMessage());
+            throw e;
+        }
     }
 
     @PutMapping("update-court/{id}")
