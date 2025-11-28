@@ -9,6 +9,7 @@ import com.totex.smashit.infra.persistence.player.PlayerRepository;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Optional;
 
 @Component
 public class PlayerRepositoryGateway implements PlayerGateway {
@@ -60,5 +61,15 @@ public class PlayerRepositoryGateway implements PlayerGateway {
                 .orElseThrow(() -> new ResourceNotFoundException("Player not found with ID: " + id));
 
         return playerEntityMapper.toDomain(existing);
+    }
+
+    @Override
+    public Optional<Player> findByName(String name) {
+        return playerRepository.findByNameIgnoreCase(name);
+    }
+
+    @Override
+    public boolean existsByName(String name) {
+        return playerRepository.findAll().stream().anyMatch(n -> n.getName().equalsIgnoreCase(name));
     }
 }
