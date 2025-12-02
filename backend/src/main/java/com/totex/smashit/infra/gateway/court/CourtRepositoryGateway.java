@@ -9,6 +9,7 @@ import com.totex.smashit.infra.persistence.court.CourtRepository;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Optional;
 
 @Component
 public class CourtRepositoryGateway implements CourtGateway {
@@ -55,5 +56,15 @@ public class CourtRepositoryGateway implements CourtGateway {
                 .orElseThrow(() -> new ResourceNotFoundException("Court not found with id: " + id));
 
         return courtEntityMapper.toDomain(existing);
+    }
+
+    @Override
+    public Optional<Court> findCourtByName(String name) {
+        return courtRepository.findByNameIgnoreCase(name);
+    }
+
+    @Override
+    public boolean existsByName(String name) {
+        return courtRepository.findAll().stream().anyMatch(n -> n.getName().equalsIgnoreCase(name));
     }
 }
