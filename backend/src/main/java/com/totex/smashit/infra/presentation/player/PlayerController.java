@@ -1,10 +1,7 @@
 package com.totex.smashit.infra.presentation.player;
 
 import com.totex.smashit.core.entities.player.Player;
-import com.totex.smashit.core.usecases.player.CreatePlayerUseCase;
-import com.totex.smashit.core.usecases.player.FindPlayerByIdUseCase;
-import com.totex.smashit.core.usecases.player.FindPlayerUseCase;
-import com.totex.smashit.core.usecases.player.UpdatePlayerUseCase;
+import com.totex.smashit.core.usecases.player.*;
 import com.totex.smashit.infra.dto.player.PlayerDto;
 import com.totex.smashit.infra.dto.player.UpdatePlayerRequest;
 import com.totex.smashit.infra.mapper.player.PlayerMapper;
@@ -27,17 +24,20 @@ public class PlayerController {
     private final CreatePlayerUseCase createPlayerUseCase;
     private final FindPlayerUseCase findPlayerUseCase;
     private final FindPlayerByIdUseCase findPlayerByIdUseCase;
+    private final FindPlayerByNameUseCase findPlayerByNameUseCase;
     private final UpdatePlayerUseCase updatePlayerUseCase;
     private final PlayerMapper playerMapper;
 
     public PlayerController(CreatePlayerUseCase createPlayerUseCase,
                             FindPlayerUseCase findPlayerUseCase,
                             FindPlayerByIdUseCase findPlayerByIdUseCase,
+                            FindPlayerByNameUseCase findPlayerByNameUseCase,
                             UpdatePlayerUseCase updatePlayerUseCase,
                             PlayerMapper playerMapper) {
         this.createPlayerUseCase = createPlayerUseCase;
         this.findPlayerUseCase = findPlayerUseCase;
         this.findPlayerByIdUseCase = findPlayerByIdUseCase;
+        this.findPlayerByNameUseCase = findPlayerByNameUseCase;
         this.updatePlayerUseCase = updatePlayerUseCase;
         this.playerMapper = playerMapper;
     }
@@ -69,6 +69,19 @@ public class PlayerController {
         log.info("Received find request to player with ID: {}", id);
         try {
             Player found = findPlayerByIdUseCase.execute(id);
+            log.info("Player found: {}", found);
+            return ResponseEntity.ok(playerMapper.toDto(found));
+        } catch (Exception e) {
+            log.error("Error while trying to find player! Error: {}", e.getMessage());
+            throw e;
+        }
+    }
+
+    @GetMapping("find-player/{name}")
+    public ResponseEntity<PlayerDto> findPlayerByName(@PathVariable String name) {
+        log.info("Received find request to player with name: {}", name);
+        try {
+            Player found = findPlayerByNameUseCase.execute(name);
             log.info("Player found: {}", found);
             return ResponseEntity.ok(playerMapper.toDto(found));
         } catch (Exception e) {
