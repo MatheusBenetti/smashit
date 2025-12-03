@@ -18,7 +18,7 @@ public class FindPlayerByNameUseCaseImpl implements FindPlayerByNameUseCase {
     }
 
     @Override
-    public Player findPlayerByName(String name) {
+    public Player execute(String name) {
         log.info("Finding player with name: {}", name);
         try {
             Player found = playerGateway.findByName(name).orElseThrow(() -> new ResourceNotFoundException("Player with name: " + name + " not found!"));
